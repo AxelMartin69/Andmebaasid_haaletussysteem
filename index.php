@@ -52,10 +52,11 @@
         <h2>Haaletussysteem</h2>
         <p><span class="error">* required field</span></p>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-            Name: <input type="text" name="name" value="<?php echo $name;?>">
+            <label for='name'>Name:</label> 
+            <input type="text" name="name" value=""> <!-- <?php echo $name;?> -->
             <span class="error">* <?php echo $nameErr;?></span>
             <br><br>
-            Decision:
+            <label for='decision'>Decision:</label>
             <input type="radio" name="decision" <?php if (isset($decision) &&     $decision=="poolt") echo "checked";?> value="poolt">Poolt
             <input type="radio" name="decision" <?php if (isset($decision) &&     $decision=="vastu") echo "checked";?> value="vastu">Vastu
             <input type="radio" name="decision" <?php if (isset($decision) &&     $decision=="erapooletu") echo "checked";?> value="erapooletu">Erapooletu
@@ -72,7 +73,7 @@
         echo "<br><br><br>";
         
         update_data($name, $decision);
-        
+        timer();
         ?>
     </body>
 </html>

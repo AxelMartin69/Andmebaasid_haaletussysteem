@@ -19,11 +19,25 @@ function voted_persons() {
         // output data of each row
         echo 'Haaletanud inimesed:<br><br>';
         $cnt = 1;
+        echo '
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nimi</th>
+                    <th>Otsus</th>
+                </tr>
+            ';
         while($row = $result->fetch_assoc()) {
-            echo $cnt.'. '.$row["nimi"].'------'.$row['otsus'];
-            echo "<br>";
+            echo '
+                <tr>
+                    <td>'.$cnt.'</td>
+                    <td>'.$row["nimi"].'</td>
+                    <td>'.$row['otsus'].'</td>
+                </tr>
+            ';      
             $cnt++;
         }
+        echo '</table>';
     } else {
         echo "Keegi pole haaletanud";
     }
@@ -58,27 +72,41 @@ function update_data($name, $decision) {
     echo "<br>";
     echo "<br>";
     voted_persons();
+    exit();
 }
 
 function timer() {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "haaletus";
     
-    // siia on jqueryt vaja
-    // https://phpcoder.tech/how-to-display-current-running-clock-in-php/
-            
-            
-    $min = 0;
-    $sec = 55;
-    echo '0:0 <br>';
-    while ($min != 5) {
-        $sec++;
-        if ($sec <= 9) {
-            $sec = 0 . $sec;
-        } elseif ($sec == 60) {
-            $sec = '00';
-            $min++;
-        };
-        sleep(1);
-        echo $min.':'.$sec.'<br>';
-    };
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+    
+    $sql = "SELECT h_alguse_aeg FROM tulemused /*WHERE otsus != 'haaletamata'*/";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo '<br>';
+            echo $row['h_alguse_aeg'];
+            echo '<br>';
+            echo substr($row['h_alguse_aeg'], 14, 2);
+            if(substr($row['h_alguse_aeg'], 14, 2)) {
+                echo 'nii on';
+            }
+        }
+    } else {
+        echo "vittus";
+    }
+    
+
 };
+
+timer();
 ?>
