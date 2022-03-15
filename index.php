@@ -53,7 +53,7 @@
         <p><span class="error">* required field</span></p>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
             <label for='name'>Name:</label> 
-            <input type="text" name="name" value=""> <!-- <?php echo $name;?> -->
+            <input type="text" name="name" value="<?php echo $name;?>"> 
             <span class="error">* <?php echo $nameErr;?></span>
             <br><br>
             <label for='decision'>Decision:</label>
@@ -66,6 +66,7 @@
         </form>
         
         <?php
+        
         update_data($name, $decision);
         voted_persons();
         ?>

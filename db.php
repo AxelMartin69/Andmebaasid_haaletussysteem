@@ -68,14 +68,12 @@ function update_data($name, $decision) {
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            if(substr($row['h_alguse_aeg'], 11, 2) == date('H') && substr($row['h_alguse_aeg'], 14, 2) <= date('i') && substr($row['h_alguse_aeg'], 14, 2) + 5 > date('i')) {
+            if(substr($row['h_alguse_aeg'], 0, 10) == date('Y-m-d') && substr($row['h_alguse_aeg'], 11, 2) == date('H') && substr($row['h_alguse_aeg'], 14, 2) <= date('i') && substr($row['h_alguse_aeg'], 14, 2) + 5 > date('i')) {
             } else {
                 die('Aeg on labi');
             }
             
         }
-    } else {
-        echo "vittus";
     }
 
 
