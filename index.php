@@ -13,6 +13,7 @@
         
         
         <?php
+        date_default_timezone_set("Europe/Tallinn");
         include 'db.php';
         // define variables and set to empty values
         $nameErr = $decisionErr = "";
@@ -66,14 +67,8 @@
         </form>
         
         <?php
-        echo "<h2>Sinu Andmed:</h2>";
-        echo $name;
-        echo "<br>";
-        echo $decision;
-        echo "<br><br><br>";
-        
         update_data($name, $decision);
-        timer();
+        voted_persons();
         ?>
     </body>
 </html>
