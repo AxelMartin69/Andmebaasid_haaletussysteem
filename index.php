@@ -7,7 +7,6 @@
         <title>Haletussusteem</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
     </head>
     <body class="">
         
@@ -15,6 +14,7 @@
         <?php
         date_default_timezone_set("Europe/Tallinn");
         include 'db.php';
+        
         // define variables and set to empty values
         $nameErr = $decisionErr = "";
         $name = $decision = "";
@@ -43,11 +43,10 @@
             $data = htmlspecialchars($data);
             return $data;
         }
-        
+
         if(array_key_exists('Submit', $_POST)) {
             update_data($name, $decision);
         };
-        
         ?>
         
         <h2>Haaletussysteem</h2>
