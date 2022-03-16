@@ -45,25 +45,25 @@
         }
         
 
-        if(array_key_exists('Submit', $_POST)) {
+        if(array_key_exists('Sisesta', $_POST)) {
             update_data($name, $decision);
         };
         ?>
         
-        <h2>Haaletussysteem</h2>
-        <p><span class="error">* required field</span></p>
+        <h2>Hääletussüsteem</h2>
+        <p><span class="error">* tähtis ala</span></p>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-            <label for='name'>Name:</label> 
+            <label for='name'>Nimi:</label> 
             <input type="text" name="name" value="<?php echo $name;?>"> 
             <span class="error">* <?php echo $nameErr;?></span>
             <br><br>
-            <label for='decision'>Decision:</label>
+            <label for='decision'>Otsus:</label>
             <input type="radio" name="decision" <?php if (isset($decision) &&     $decision=="poolt") echo "checked";?> value="poolt">Poolt
             <input type="radio" name="decision" <?php if (isset($decision) &&     $decision=="vastu") echo "checked";?> value="vastu">Vastu
             <input type="radio" name="decision" <?php if (isset($decision) &&     $decision=="erapooletu") echo "checked";?> value="erapooletu">Erapooletu
             <span class="error">* <?php echo $decisionErr;?></span>
             <br><br>
-            <input type="submit" name="submit" value="Submit">  
+            <input type="submit" name="submit" value="Sisesta">  
         </form>
         
         <?php
