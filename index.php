@@ -43,6 +43,34 @@
             $data = htmlspecialchars($data);
             return $data;
         }
+        function result() {
+            echo "<br>";
+            echo "<br>";
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "haaletus";
+                    
+            // Create connection
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+        
+            $sql = "SELECT arv, h_alguse_aeg, poolt, vastu FROM tulemused;";
+                    
+            $result = $conn->query($sql);
+        
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo 'Haaletanud: '.$row['arv'].'<br>Alguse aeg: '.$row['h_alguse_aeg'].'<br>Poolt: '.$row['poolt'].'<br>Vastu: '.$row['vastu'].'<br><br>';
+                }
+            }
+            
+            $conn->close();
+            
+        }
 
         if(array_key_exists('Submit', $_POST)) {
             update_data($name, $decision);
@@ -68,7 +96,9 @@
         <?php
         
         update_data($name, $decision);
+        result();
         voted_persons();
+        
         ?>
     </body>
 </html>

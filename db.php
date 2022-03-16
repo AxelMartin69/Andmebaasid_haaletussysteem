@@ -1,5 +1,7 @@
 <?php
 date_default_timezone_set("Europe/Tallinn");
+
+
 function voted_persons() {
     $servername = "localhost";
     $username = "root";
@@ -70,6 +72,8 @@ function update_data($name, $decision) {
         while($row = $result->fetch_assoc()) {
             if(substr($row['h_alguse_aeg'], 0, 10) == date('Y-m-d') && substr($row['h_alguse_aeg'], 11, 2) == date('H') && substr($row['h_alguse_aeg'], 14, 2) <= date('i') && substr($row['h_alguse_aeg'], 14, 2) + 5 > date('i')) {
             } else {
+                $update = "UPDATE haaletus SET otsus = 'haaletamata'";
+                mysqli_query($conn, $update);
                 die('Aeg on labi');
             }
             
@@ -91,5 +95,8 @@ function update_data($name, $decision) {
     
     $conn->close();
     
-}
+};
+
+
+
 ?>
