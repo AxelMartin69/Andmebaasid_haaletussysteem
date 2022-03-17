@@ -110,7 +110,8 @@ function update_data($name, $decision) {
 
 
     $sql = "UPDATE haaletus SET otsus = '$decision', aeg = CURRENT_TIMESTAMP() WHERE nimi = '$name'";
-            
+    $logi = "INSERT INTO logi(logi) VALUES ('$name:$decision')";
+    mysqli_query($conn, $logi);
     if (mysqli_query($conn, $sql)) {
         echo "<h2>Sinu Andmed:</h2>";
         echo $name;
